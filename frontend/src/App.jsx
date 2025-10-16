@@ -1,67 +1,38 @@
-import { useState } from "react";
-import "./App.css";
-
-const roadmapData = [
-  {
-    topic: "Arrays",
-    subtopics: ["Basics", "Sorting", "Two Pointer Approach", "Sliding Window"],
-  },
-  {
-    topic: "Strings",
-    subtopics: ["String Basics", "Palindrome", "Pattern Matching"],
-  },
-  {
-    topic: "Linked List",
-    subtopics: ["Singly Linked List", "Doubly Linked List", "Cycle Detection"],
-  },
-];
+import './App.css';
+import ProgressTracker from './ProgressTracker';
 
 function App() {
-  const [expanded, setExpanded] = useState({});
-  const [completed, setCompleted] = useState({});
-
-  const toggleTopic = (topic) => {
-    setExpanded((prev) => ({ ...prev, [topic]: !prev[topic] }));
-  };
-
-  const toggleSubtopic = (topic, subtopic) => {
-    const key = `${topic}-${subtopic}`;
-    setCompleted((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
   return (
-    <div className="app-container">
-      <h1>🚀 APS DSA Roadmap Tracker</h1>
-      <p>Track your daily progress in the Striver A2Z DSA Course!</p>
+    <div className="App">
+      <h1>🚀 APS DSA Roadmap</h1>
+      <p>Welcome to your learning journey! This site will guide you through mastering DSA step by step.</p>
 
-      {roadmapData.map(({ topic, subtopics }) => (
-        <div key={topic} className="topic-card">
-          <div className="topic-header" onClick={() => toggleTopic(topic)}>
-            <h2>{topic}</h2>
-            <span>{expanded[topic] ? "▲" : "▼"}</span>
-          </div>
+      <div className="sections">
+        <section>
+          <h2>📘 Introduction</h2>
+          <p>Learn the basics of Data Structures and Algorithms in an easy and structured way.</p>
+        </section>
 
-          {expanded[topic] && (
-            <ul className="subtopic-list">
-              {subtopics.map((sub) => {
-                const key = `${topic}-${sub}`;
-                return (
-                  <li key={sub} className="subtopic-item">
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={completed[key] || false}
-                        onChange={() => toggleSubtopic(topic, sub)}
-                      />
-                      {sub}
-                    </label>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </div>
-      ))}
+        <section>
+          <h2>🧩 Roadmap</h2>
+          <ul>
+            <li>Step 1: Learn the Basics of C++/Java/Python</li>
+            <li>Step 2: Master Arrays and Strings</li>
+            <li>Step 3: Learn Recursion and Sorting</li>
+            <li>Step 4: Dive into Linked Lists, Stacks, and Queues</li>
+            <li>Step 5: Practice Trees, Graphs, and Dynamic Programming</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>🛠️ Resources</h2>
+          <p>
+            Follow the <a href="https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-problems/" target="_blank">Striver’s DSA Sheet</a> to practice effectively.
+          </p>
+        </section>
+
+        <ProgressTracker />
+      </div>
     </div>
   );
 }
